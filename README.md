@@ -22,4 +22,4 @@ Developed and tested on Mac OS X Mojave (10.14.6)
 First release
 
 <b>Version 0.2 [6/12/2019]</b>
-Changed the output folder name to the device UDID instead of device NAME
+Changed the output folder name to the device UDID instead of the device NAME
