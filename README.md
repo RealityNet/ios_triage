@@ -18,3 +18,8 @@ How to use it
 - Make the script executable (chmod +x ios_bfu_triage.sh)
 - Execute the script and follow the instructions
 
+Version 0.1 [5/12/2019]
+First release
+
+Version 0.2 [6/12/2019]
+Changed the output folder name to the device UDID instead of device NAME
