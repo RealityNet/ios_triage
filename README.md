@@ -3,7 +3,7 @@ Bash script to extract data from a "chekcra1ned" iOS device
 
 Developed and tested on Mac OS X Mojave (10.14.6)
 
-Requirements
+<b>Requirements</b>
 
 - checkra1n (https://checkra.in/)
 - libimobiledevice (https://www.libimobiledevice.org/)
