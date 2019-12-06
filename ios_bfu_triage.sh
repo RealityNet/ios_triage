@@ -11,7 +11,7 @@ TMP_INFO=$(mktemp)
 
 clear
 
-echo "[*] iOS BFU Triage Script - version 0.1 - 5/12/2019"
+echo "[*] iOS BFU Triage Script - version 0.2 - 6/12/2019"
 echo "[*] This script dumps information from an iOS Device where checkra1n was installed"
 echo "[*] This script requires libimobiledevice (iproxy and ideviceinfo) and SSHPASS"
 echo "[*] DISCLAIMER: This script is a PoC and must be used only on test devices"
@@ -26,75 +26,75 @@ echo "[*] Wi-Fi Mac Address: ${WIFI}" | tee -a ${TMP_INFO}
 echo "[*]" | tee -a ${TMP_INFO}
 
 NOW=$(date +"%Y_%m_%d_%H_%M_%S")
-SPATH=$NAME.$NOW
+SPATH=$UDID.$NOW
 
 mkdir -p ${SPATH}
-cat ${TMP_INFO} > ${SPATH}/${NAME}_info.txt
+cat ${TMP_INFO} > ${SPATH}/${UDID}_info.txt
 rm "${TMP_INFO}"
 
 read -p "[*] Do you want to execute live commands (like date, sysctl, hostname, df, ifconfig, etc) on ${NAME}? (Y/n) : " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    mkdir -p ${SPATH}/${NAME}_live
+    mkdir -p ${SPATH}/${UDID}_live
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] LIVE Acquisition started at ${NOW}" 
-    echo "[*] LIVE Acquisition started at ${NOW}" >> ${SPATH}/${NAME}_live/${NAME}_live_log.txt
+    echo "[*] LIVE Acquisition started at ${NOW}" >> ${SPATH}/${UDID}_live/${UDID}_live_log.txt
     echo "[*] Executing live commands"
     echo "[*] date"
-    sshpass -p alpine ssh root@localhost "date" >> ${SPATH}/${NAME}_live/${NAME}_date.txt
+    sshpass -p alpine ssh root@localhost "date" >> ${SPATH}/${UDID}_live/${UDID}_date.txt
     echo "[*] sysctl -a"
-    sshpass -p alpine ssh root@localhost "sysctl -a" >> ${SPATH}/${NAME}_live/${NAME}_sysctl-a.txt
+    sshpass -p alpine ssh root@localhost "sysctl -a" >> ${SPATH}/${UDID}_live/${UDID}_sysctl-a.txt
     echo "[*] hostname"
-    sshpass -p alpine ssh root@localhost "hostname" >> ${SPATH}/${NAME}_live/${NAME}_hostname.txt
+    sshpass -p alpine ssh root@localhost "hostname" >> ${SPATH}/${UDID}_live/${UDID}_hostname.txt
     echo "[*] uname -a"
-    sshpass -p alpine ssh root@localhost "uname -a" >> ${SPATH}/${NAME}_live/${NAME}_uname-a.txt
+    sshpass -p alpine ssh root@localhost "uname -a" >> ${SPATH}/${UDID}_live/${UDID}_uname-a.txt
     echo "[*] id"
-    sshpass -p alpine ssh root@localhost "id" >> ${SPATH}/${NAME}_live/${NAME}_id.txt
+    sshpass -p alpine ssh root@localhost "id" >> ${SPATH}/${UDID}_live/${UDID}_id.txt
     echo "[*] df"
-    sshpass -p alpine ssh root@localhost "df" >> ${SPATH}/${NAME}_live/${NAME}_df.txt
+    sshpass -p alpine ssh root@localhost "df" >> ${SPATH}/${UDID}_live/${UDID}_df.txt
     echo "[*] df -ah"
-    sshpass -p alpine ssh root@localhost "df -ah" >> ${SPATH}/${NAME}_live/${NAME}_df-ah.txt
+    sshpass -p alpine ssh root@localhost "df -ah" >> ${SPATH}/${UDID}_live/${UDID}_df-ah.txt
     echo "[*] ifconfig -a"
-    sshpass -p alpine ssh root@localhost "ifconfig -a" >> ${SPATH}/${NAME}_live/${NAME}_ifconfig-a.txt
+    sshpass -p alpine ssh root@localhost "ifconfig -a" >> ${SPATH}/${UDID}_live/${UDID}_ifconfig-a.txt
     echo "[*] netstat -an"
-    sshpass -p alpine ssh root@localhost "netstat -an" >> ${SPATH}/${NAME}_live/${NAME}_netstat-an.txt
+    sshpass -p alpine ssh root@localhost "netstat -an" >> ${SPATH}/${UDID}_live/${UDID}_netstat-an.txt
     echo "[*] mount"
-    sshpass -p alpine ssh root@localhost "mount" >> ${SPATH}/${NAME}_live/${NAME}_mount.txt
+    sshpass -p alpine ssh root@localhost "mount" >> ${SPATH}/${UDID}_live/${UDID}_mount.txt
     echo "[*] ps -ef"
-    sshpass -p alpine ssh root@localhost "ps -ef" >> ${SPATH}/${NAME}_live/${NAME}_ps-ef.txt
+    sshpass -p alpine ssh root@localhost "ps -ef" >> ${SPATH}/${UDID}_live/${UDID}_ps-ef.txt
     echo "[*] ps aux"
-    sshpass -p alpine ssh root@localhost "ps aux" >> ${SPATH}/${NAME}_live/${NAME}_ps_aux.txt
+    sshpass -p alpine ssh root@localhost "ps aux" >> ${SPATH}/${UDID}_live/${UDID}_ps_aux.txt
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] LIVE Acquisition completed at ${NOW}"
-    echo "[*] LIVE Acquisition completed at ${NOW}" >> ${SPATH}/${NAME}_live/${NAME}_live_log.txt
+    echo "[*] LIVE Acquisition completed at ${NOW}" >> ${SPATH}/${UDID}_live/${UDID}_live_log.txt
 fi
 
-read -p "[*] Do you want to create a triage image of the /private/ folder in '${SPATH}/${NAME}_acquisition/${NAME}.tar'? (Y/n) : " -n 1 -r
+read -p "[*] Do you want to create a triage image of the /private/ folder in '${SPATH}/${UDID}_acquisition/${UDID}.tar'? (Y/n) : " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    mkdir -p ${SPATH}/${NAME}_acquisition
+    mkdir -p ${SPATH}/${UDID}_acquisition
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] Triage image of /private/ started at ${NOW}" 
-    echo "[*] Triage image of /private/ started at  ${NOW}" >> ${SPATH}/${NAME}_acquisition/${NAME}_acquisition_log.txt
+    echo "[*] Triage image of /private/ started at  ${NOW}" >> ${SPATH}/${UDID}_acquisition/${UDID}_acquisition_log.txt
     echo "[*] Executing 'tar -cf - /private --exclude=/private/var/containers/Bundle --exclude=/private/var/MobileAsset'" 
-    sshpass -p alpine ssh root@localhost "tar -cf - /private --exclude=/private/var/containers/Bundle --exclude=/private/var/MobileAsset" > ${SPATH}/${NAME}_acquisition/${NAME}.tar 2>>${SPATH}/${NAME}_acquisition/${NAME}_acquisition_log.txt
+    sshpass -p alpine ssh root@localhost "tar -cf - /private --exclude=/private/var/containers/Bundle --exclude=/private/var/MobileAsset" > ${SPATH}/${UDID}_acquisition/${UDID}.tar 2>>${SPATH}/${UDID}_acquisition/${UDID}_acquisition_log.txt
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] Triage image of /private/ completed at ${NOW}" 
-    echo "[*] Triage image of /private/ completed  ${NOW}" >> ${SPATH}/${NAME}_acquisition/${NAME}_acquisition_log.txt
-    echo "[*] shasum of ${SPATH}/${NAME}.tar in progress"   
-    echo "[*] shasum of ${SPATH}/${NAME}.tar in progress" >> ${SPATH}/${NAME}_acquisition/${NAME}_acquisition_log.txt    
-    shasum ${SPATH}/${NAME}_acquisition/${NAME}.tar >> ${SPATH}/${NAME}_acquisition/${NAME}_acquisition_log.txt
+    echo "[*] Triage image of /private/ completed  ${NOW}" >> ${SPATH}/${UDID}_acquisition/${UDID}_acquisition_log.txt
+    echo "[*] shasum of ${SPATH}/${UDID}.tar in progress"   
+    echo "[*] shasum of ${SPATH}/${UDID}.tar in progress" >> ${SPATH}/${UDID}_acquisition/${UDID}_acquisition_log.txt    
+    shasum ${SPATH}/${UDID}_acquisition/${UDID}.tar >> ${SPATH}/${UDID}_acquisition/${UDID}_acquisition_log.txt
 fi
 
 read -p "[*] Do you want to execute 'find /private' in ${NAME}? (Y/n) : " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    mkdir -p ${SPATH}/${NAME}_find
+    mkdir -p ${SPATH}/${UDID}_find
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] find /private started at ${NOW}" 
-    echo "[*] find /private started at ${NOW}" >> ${SPATH}/${NAME}_find/${NAME}_find.txt
-    sshpass -p alpine ssh root@localhost "find /private" >> ${SPATH}/${NAME}_find/${NAME}_find.txt    
+    echo "[*] find /private started at ${NOW}" >> ${SPATH}/${UDID}_find/${UDID}_find.txt
+    sshpass -p alpine ssh root@localhost "find /private" >> ${SPATH}/${UDID}_find/${UDID}_find.txt    
     NOW=$(date +"%Y_%m_%d_%H_%M_%S")
     echo "[*] find /private completed at ${NOW}" 
-    echo "[*] find /private completed at ${NOW}" >> ${SPATH}/${NAME}_find/${NAME}_find.txt
+    echo "[*] find /private completed at ${NOW}" >> ${SPATH}/${UDID}_find/${UDID}_find.txt
 fi
