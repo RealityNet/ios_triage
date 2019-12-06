@@ -9,7 +9,7 @@ Developed and tested on Mac OS X Mojave (10.14.6)
 - libimobiledevice (https://www.libimobiledevice.org/)
 - SSHPASS for Mac OS X (https://gist.github.com/arunoda/7790979)
 
-How to use it
+<b>How to use it</b>
 
 - checkra1n an iOS device
 - Open a terminal and execute "iproxy 22 44"
@@ -18,8 +18,8 @@ How to use it
 - Make the script executable (chmod +x ios_bfu_triage.sh)
 - Execute the script and follow the instructions
 
-Version 0.1 [5/12/2019]
+<b>Version 0.1 [5/12/2019]</b>
 First release
 
-Version 0.2 [6/12/2019]
+<b>Version 0.2 [6/12/2019]</b>
 Changed the output folder name to the device UDID instead of device NAME
