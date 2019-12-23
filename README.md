@@ -23,3 +23,9 @@ First release
 
 <b>Version 0.2 [6/12/2019]</b>
 Changed the output folder name to the device UDID instead of the device NAME
+
+<b>Version 1.0 [23/12/2019]</b>
+For instructions read this:
+Checkra1n Era - Ep 5 - Automating extraction and processing (aka "Marry Xmas!")
+(https://blog.digital-forensics.it/2019/12/checkra1n-era-ep-5-automating.html)
+
