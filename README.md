@@ -1,4 +1,4 @@
-# ios_bfu_triage
+# iOS Triage
 Bash script to extract data from a "chekcra1ned" iOS device
 
 Developed and tested on Mac OS X Mojave (10.14.6)
@@ -36,4 +36,8 @@ Changed the output folder name to the device UDID instead of the device NAME
 For detailed instructions read this:
 Checkra1n Era - Ep 5 - Automating extraction and processing (aka "Marry Xmas!")
 (https://blog.digital-forensics.it/2019/12/checkra1n-era-ep-5-automating.html)
+
+<b>Version 1.5 [4/6/2020]</b>
+
+
 
