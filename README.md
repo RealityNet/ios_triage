@@ -37,7 +37,9 @@ For detailed instructions read this:
 Checkra1n Era - Ep 5 - Automating extraction and processing (aka "Marry Xmas!")
 (https://blog.digital-forensics.it/2019/12/checkra1n-era-ep-5-automating.html)
 
-<b>Version 1.5 [4/6/2020]</b>
+<b>Version 2.0 [5/6/2020]</b>
+- Improved direct extraction and processing with APOLLO, iLEAPP and sysdiagnose
+- Improved "find" function
 
 
 
