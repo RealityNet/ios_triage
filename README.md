@@ -1,5 +1,5 @@
 # iOS Triage
-Bash script to extract data from a "chekcra1ned" iOS device
+Bash script to extract data from a "checkra1ned" iOS device
 
 Developed and tested on Mac OS X Mojave (10.14.6)
 
@@ -22,7 +22,7 @@ Developed and tested on Mac OS X Mojave (10.14.6)
 - checkra1n an iOS device
 - Open a terminal and execute "sudo iproxy 22 44"
 - Open a new terminal and execute ssh root@localhost and add localhost to the list of known hosts
-- Download the script in the folder where you want to save the extraction (i.e. Destkop)
+- Download the script in the folder where you want to save the extraction (i.e. Desktop)
 - Make the script executable (chmod +x ios_bfu_triage.sh)
 - Execute the script and follow the instructions
 
